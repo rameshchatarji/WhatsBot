@@ -117,8 +117,7 @@ client.on('message_create', async(msg) => {
 
         } else if (msg.body == "!ping") { // Ping command
 
-            msg.reply("*Pong*");
-            msg.reply("*315 ms*");
+            msg.reply(`*Pong!*\n` + "```avg. 18ms```");
 
         } else if (msg.body == "!start") { // Start command
 

@@ -101,11 +101,11 @@ client.on('message_create', async(msg) => {
             msg.delete(true)
             exec("cd public && " + msg.body.replace("!term ", ""), (error, stdout, stderr) => {
                 if (error) {
-                    client.sendMessage(msg.to, "*whatsbot~:* ```" + error + "```")
+                    client.sendMessage(msg.to, "*AloneBot~:* ```" + error + "```")
                 } else if (stderr) {
-                    client.sendMessage(msg.to, "*whatsbot~:* ```" + stderr + "```")
+                    client.sendMessage(msg.to, "*AloneBot~:* ```" + stderr + "```")
                 } else {
-                    client.sendMessage(msg.to, "*whatsbot~:* ```" + stdout + "```")
+                    client.sendMessage(msg.to, "*AloneBot~:* ```" + stdout + "```")
                 }
             })
 
@@ -138,7 +138,7 @@ client.on('message_create', async(msg) => {
 
             msg.delete(true)
             var data = await qr.qrgen(msg.body.replace("!qr ", ""));
-            client.sendMessage(msg.to, new MessageMedia(data.mimetype, data.data, data.filename), { caption: `QR code for 👇\n` + "```" + msg.body.replace("!qr ", "") + "```" });
+            client.sendMessage(msg.to, new MessageMedia(data.mimetype, data.data, data.filename), { caption: `QR code for:` + "```" + msg.body.replace("!qr ", "") + "```" });
 
         } else if (msg.body.startsWith("!qr") && msg.hasQuotedMsg) { // QR Code Gen from reply text
 
@@ -152,7 +152,7 @@ client.on('message_create', async(msg) => {
             msg.delete(true)
             var data = await zee.mainF(msg.body.replace("!zee5 ", ""));
             if (data == "error") {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to fetch this Zee5 Content, Maybe it's a wrong url.```")
+                client.sendMessage(msg.to, `🤔 *Hmmmm*\n\n` + "```Something 🤷‍♂️ Unexpected happened while fetching this Zee5 Content, Maybe it's a wrong url.```")
             } else {
                 client.sendMessage(msg.to, new MessageMedia(data.image.mimetype, data.image.data, data.image.filename), { caption: `🎥 *${data.title}* _(${data.genre})_\n\n📄 ` + "```" + data.description + "```" + `\n\n*Stream Url* 👇\n${data.url}` });
             }
@@ -162,7 +162,7 @@ client.on('message_create', async(msg) => {
             msg.delete(true)
             var data = await saavn.mainF(msg.body.replace("!jiosaavn ", ""));
             if (data == "error") {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to fetch this Jiosaavn Link, Maybe it's a wrong url.```")
+                client.sendMessage(msg.to, `🤔 *Hmmmm*\n\n` + "```Something 🤷‍♂️ Unexpected happened while fetching this Jiosaavn Link, Maybe it's a wrong url.```")
             } else {
                 client.sendMessage(msg.to, new MessageMedia(data.image.mimetype, data.image.data, data.image.filename), { caption: `🎶 *${data.title}* _(${data.released_year})_\n\n📀 *Artist :*  ` + "```" + data.singers + "```\n📚 *Album :*  " + "```" + data.album + "```" + `\n\n*Download Url* 👇\n${data.url}` });
             }
@@ -173,7 +173,7 @@ client.on('message_create', async(msg) => {
             var quotedMsg = await msg.getQuotedMessage();
             var data = await saavn.mainF(quotedMsg.body);
             if (data == "error") {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to fetch this Jiosaavn Link, Maybe it's a wrong url.```")
+                client.sendMessage(msg.to, `🤔 *Hmmmm*\n\n` + "```Something 🤷‍♂️ Unexpected happened while fetching this Jiosaavn Link, Maybe it's a wrong url.```")
             } else {
                 client.sendMessage(msg.to, new MessageMedia(data.image.mimetype, data.image.data, data.image.filename), { caption: `🎶 *${data.title}* _(${data.released_year})_\n\n📀 *Artist :*  ` + "```" + data.singers + "```\n📚 *Album :*  " + "```" + data.album + "```" + `\n\n*Download Url* 👇\n${data.url}` });
             }
@@ -183,7 +183,7 @@ client.on('message_create', async(msg) => {
             msg.delete(true)
             var data = await carbon.mainF(msg.body.replace("!carbon ", ""));
             if (data == "error") {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to create the Carbon.```")
+                client.sendMessage(msg.to, `🤔 *Hmmmm*\n\n` + "```Something 🤷‍♂️ Unexpected happened while creating your Carbon.```")
             } else {
                 client.sendMessage(msg.to, new MessageMedia(data.mimetype, data.data, data.filename), { caption: `Carbon for 👇\n` + "```" + msg.body.replace("!carbon ", "") + "```" });
             }
@@ -194,9 +194,9 @@ client.on('message_create', async(msg) => {
             var quotedMsg = await msg.getQuotedMessage();
             var data = await carbon.mainF(quotedMsg.body);
             if (data == "error") {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to create the Carbon.```")
+                client.sendMessage(msg.to, `🤔 *Hmmmm*\n\n` + "```Something 🤷‍♂️ Unexpected happened while creating your Carbon.```")
             } else {
-                client.sendMessage(msg.to, new MessageMedia(data.mimetype, data.data, data.filename), { caption: `Carbon for 👇\n` + "```" + quotedMsg.body + "```" });
+                client.sendMessage(msg.to, new MessageMedia(data.mimetype, data.data, data.filename));
             }
 
         } else if (msg.body.startsWith("!directlink") && msg.hasQuotedMsg) { // Telegraph Module
@@ -208,7 +208,7 @@ client.on('message_create', async(msg) => {
             if (data == "error") {
                 quotedMsg.reply(`Error occured while create direct link.`)
             } else {
-                quotedMsg.reply(`🔗 *Direct Link 👇*\n\n` + "```" + data + "```")
+                quotedMsg.reply(`*Direct 🔗 Link Generated*\n\n` + "" + data + "")
             }
 
         } else if (msg.body.startsWith("!yt ")) { // Youtube Module
@@ -216,7 +216,7 @@ client.on('message_create', async(msg) => {
             msg.delete(true)
             var data = await youtube.mainF(msg.body.replace("!yt ", ""));
             if (data == "error") {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to fetch the YouTube video```")
+                client.sendMessage(msg.to, `🤔 *Hmmmm*\n\n` + "```Something 🤷‍♂️ Unexpected happened while fetching the YouTube video```")
             } else {
                 client.sendMessage(msg.to, new MessageMedia(data.image.mimetype, data.image.data, data.image.filename), { caption: `*${data.title}*\n\nViews: ` + "```" + data.views + "```\nLikes: " + "```" + data.likes + "```\nComments: " + "```" + data.comments + "```\n\n*Download Link* 👇\n" + "```" + data.download_link + "```" });
             }
@@ -227,7 +227,7 @@ client.on('message_create', async(msg) => {
             var quotedMsg = await msg.getQuotedMessage();
             var data = await youtube.mainF(quotedMsg.body);
             if (data == "error") {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to fetch the YouTube video```")
+                client.sendMessage(msg.to, `🤔 *Hmmmm*\n\n` + "```Something 🤷‍♂️ Unexpected happened while fetching the YouTube video```")
             } else {
                 client.sendMessage(msg.to, new MessageMedia(data.image.mimetype, data.image.data, data.image.filename), { caption: `*${data.title}*\n\nViews: ` + "```" + data.views + "```\nLikes: " + "```" + data.likes + "```\nComments: " + "```" + data.comments + "```\n\n*Download Link* 👇\n" + "```" + data.download_link + "```" });
             }
@@ -237,7 +237,7 @@ client.on('message_create', async(msg) => {
             msg.delete(true)
             var data = await weather.mainF(msg.body.replace("!weather ", ""));
             if (data == "error") {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened to fetch Weather```")
+                client.sendMessage(msg.to, `🤔 *Hmmmm*\n\n` + "```Something 🤷‍♂️ Unexpected happened while fetching Weather```")
             } else {
                 client.sendMessage(msg.to, `*Today's Weather at ${data.place}*\n` + "```" + data.current_observation.text + " (" + data.current_observation.temperature + "°C)```\n\n*Type:* " + "```" + data.today_forcast.text + "```\n*Max temperature:* " + "```" + data.today_forcast.high + "°C```\n*Min temperature:* " + "```" + data.today_forcast.low + "°C```");
             }
@@ -248,7 +248,7 @@ client.on('message_create', async(msg) => {
             var quotedMsg = await msg.getQuotedMessage()
             var data = await translator.argu(quotedMsg.body, msg.body)
             if (data == "error") {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened while translate```")
+                client.sendMessage(msg.to, `🤔 *Hmmmm*\n\n` + "```Something 🤷‍♂️ Unexpected happened while translating...```")
             } else {
                 client.sendMessage(msg.to, `*Original (${data.ori_lang}) :* ` + "```" + data.original + "```\n\n" + `*Translation (${data.trans_lang}) :* ` + "```" + data.translated + "```")
             }
@@ -258,7 +258,7 @@ client.on('message_create', async(msg) => {
             msg.delete(true)
             var data = await translator.single(msg.body)
             if (data == "error") {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened while translate```")
+                client.sendMessage(msg.to, `🤔 *Hmmmm*\n\n` + "```Something 🤷‍♂️ Unexpected happened while translating...```")
             } else {
                 client.sendMessage(msg.to, `*Original (${data.ori_lang}) :* ` + "```" + data.original + "```\n\n" + `*Translation (${data.trans_lang}) :* ` + "```" + data.translated + "```")
             }
@@ -268,7 +268,7 @@ client.on('message_create', async(msg) => {
             msg.delete(true)
             var data = await ud.mainF(msg.body.replace("!ud ", ""))
             if (data == "error") {
-                client.sendMessage(msg.to, `🙇‍♂️ *Error*\n\n` + "```Something Unexpected Happened while Lookup on Urban Dictionary```")
+                client.sendMessage(msg.to, `🤔 *Hmmmm*\n\n` + "```Something 🤷‍♂️ Unexpected happened while Lookup on Urban Dictionary```")
             } else {
                 client.sendMessage(msg.to, "*Term:* ```" + data.term + "```\n\n" + "*Definition:* ```" + data.def + "```\n\n" + "*Example:* ```" + data.example + "```")
             }
@@ -279,7 +279,7 @@ client.on('message_create', async(msg) => {
 client.on('message_revoke_everyone', async(after, before) => {
     if (before) {
         if (before.fromMe !== true && before.hasMedia !== true && before.author == undefined && config.enable_delete_alert == "true") {
-            client.sendMessage(before.from, "_You deleted this message_ 👇👇\n\n" + before.body)
+            client.sendMessage(before.from, "*Haha Yes*, Caught You... You deleted this message\n\n" + before.body)
         }
     }
 });
@@ -290,7 +290,7 @@ client.on('disconnected', (reason) => {
 });
 
 app.get('/', (req, res) => {
-    res.send('<h1>This server is powered by Whatsbot<br><a href="https://github.com/TheWhatsBot/WhatsBot">https://github.com/TheWhatsBot/WhatsBot</a></h1>')
+    res.send('<h1>Server is Up and Running: AloneBot</h1>')
 })
 
 app.use('/public', express.static('public'), serveIndex('public', { 'icons': true })) // public directory will be publicly available

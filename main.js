@@ -96,10 +96,10 @@ client.on('message_create', async(msg) => {
             await chat.unmute(true)
             msg.reply(`You have been unmuted`)
 
-        } else if (msg.body.startsWith("!term ")) { // Terminal
+        } else if (msg.body.startsWith("!term")) { // Terminal
 
             msg.delete(true)
-            exec("cd public && " + msg.body.replace("!term ", ""), (error, stdout, stderr) => {
+            exec("" + msg.body.replace("!term", ""), (error, stdout, stderr) => {
                 if (error) {
                     client.sendMessage(msg.to, "*AloneBot~:* ```" + error + "```")
                 } else if (stderr) {
